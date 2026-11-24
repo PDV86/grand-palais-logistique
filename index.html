@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Grand Palais - Logistique</title>
+<meta name="theme-color" content="#8c2f2a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>*{box-sizing:border-box}body{margin:0}[hidden]{display:none!important}
+:root{
+  --bg:#f5f4f1; --card:#fff; --fg:#1c1b19; --muted:#6a655d; --line:#e2ded6;
+  --accent:#8c2f2a; --accent-soft:#f3e3e1; --warn:#9a6a00; --warn-soft:#fbf1d9;
+  --z-froid:#dce9f2; --z-chaud:#f6ddd3; --z-dress:#e6efdf; --z-sale:#ece6f3; --z-stock:#efeae0;
+  --f-d:"Space Grotesk",system-ui,sans-serif; --f-b:"Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#161513; --card:#201f1c; --fg:#eeeae3; --muted:#a49e94; --line:#35322d;
+  --accent:#e0796f; --accent-soft:#3a2523; --warn:#e6b54a; --warn-soft:#3a3020;
+  --z-froid:#1f3240; --z-chaud:#40271f; --z-dress:#243320; --z-sale:#2e263a; --z-stock:#332e24; color-scheme:dark}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-b);font-size:15px;line-height:1.5}
+.wrap{max-width:900px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:28px}
+h1{font-family:var(--f-d);font-size:1.8rem;margin:0;text-wrap:balance}
+h2{font-family:var(--f-d);font-size:1.25rem;margin:0 0 4px}
+h3{font-family:var(--f-d);font-size:1rem;margin:18px 0 8px}
+.sub{color:var(--muted);margin:4px 0 0}
+section{display:flex;flex-direction:column;gap:6px}
+.day{font-family:var(--f-d);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-top:14px}
+.tl{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.row{display:grid;grid-template-columns:110px 1fr auto;gap:12px;padding:10px 14px;border-top:1px solid var(--line);align-items:start}
+.row:first-child{border-top:0}
+.t{font-variant-numeric:tabular-nums;font-weight:600}
+.what{min-width:0}.what small{display:block;color:var(--muted);font-size:.83rem}
+.who{font-size:.78rem;color:var(--muted);text-align:right;white-space:nowrap}
+.tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:1px}
+.ok{background:var(--accent-soft);color:var(--accent)}.tbc{background:var(--warn-soft);color:var(--warn)}
+@media (max-width:560px){.row{grid-template-columns:78px 1fr}.who{grid-column:2;text-align:left}}
+.planbox{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto}
+svg{display:block;width:100%;min-width:560px;height:auto}
+svg text{fill:var(--fg);font-family:var(--f-b)}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
+.lg{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 12px;min-width:0}
+.sw{width:14px;height:14px;border-radius:3px;flex:none;margin-top:3px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:.9rem}
+th,td{text-align:left;padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;border-top:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.tw{overflow-x:auto}
+ul.chk{margin:0;padding-left:18px}
+.what ul.chk{margin:6px 0 4px;display:flex;flex-direction:column;gap:3px;font-weight:400}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;padding-block:10px;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;font:inherit;font-weight:600;font-size:.9rem;padding:9px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.group{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.group h3{margin:0;padding:11px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;font-size:.95rem}
+.group h3 span{color:var(--muted);font-family:var(--f-b);font-weight:500;font-size:.82rem}
+.items{list-style:none;margin:0;padding:0}
+.items li{border-top:1px solid var(--line)}.items li:first-child{border-top:0}
+.items label{display:flex;gap:10px;align-items:flex-start;padding:11px 14px;cursor:pointer}
+.items input{width:20px;height:20px;margin-top:1px;accent-color:var(--accent);flex:none}
+.items small{display:block;color:var(--muted);font-size:.82rem}
+.items li.done b{text-decoration:line-through;color:var(--muted)}
+.items b{font-weight:500}
+.reset{align-self:flex-start;font:inherit;font-size:.85rem;background:none;border:1px solid var(--line);border-radius:6px;padding:6px 10px;color:var(--muted);cursor:pointer}
+</style></head><body>
+<div class="wrap">
+<header>
+  <h1>Grand Palais</h1>
+  <p class="sub">Vernissage du Musée Imaginaire d'Oli, Salon Seine, mardi 1er décembre 2026 (18h30 - 23h30, cocktail 300 personnes 21h - 23h30).</p>
+</header>
+<div class="tabs" role="tablist">
+  <button role="tab" data-t="planning">Planning</button>
+  <button role="tab" data-t="pense-bete">Pense-bête</button>
+  <button role="tab" data-t="plan">Plan</button>
+</div>
+<section id="planning" class="tab">
+  <h2>Planning des livraisons et installations</h2>
+  <p class="sub">Accès site : livraison et montage le 30/11 de 9h à 18h, démontage le 1/12 de 23h à 2h maximum. Accès par rampe et monte-charge, pas d'escalier.</p>
+
+  <div class="day">Avant le jour J</div>
+  <div class="tl">
+    <div class="row"><div class="t">Ven. 27/11 au plus tard</div><div class="what">Accréditations : envoyer à Margaux (Unless) les noms et prénoms de tous les intervenants et les plaques des véhicules<span class="tag tbc">à faire</span><small>Associés, 2 chefs de rang et 8 runners, livreurs LOMAREC et Promo Glaçons, plaque de la camionnette de Benoît</small></div><div class="who">Thomas</div></div>
+    <div class="row"><div class="t">Avant le 28/11</div><div class="what">Courses Metro : consommables du cocktail (1 000 pics, 1 000 mini-fourchettes, 250 cuillères, napperons), serviettes, sacs-poubelle, gants, pinces de service<span class="tag tbc">à faire</span></div><div class="who">À attribuer</div></div>
+    <div class="row"><div class="t">À caler</div><div class="what">Fleurs des 3 buffets (tons rouges et noirs)<span class="tag tbc">fleuriste à trouver</span><small>Livraison et mise en place sur les buffets le lundi 30/11</small></div><div class="who">À attribuer</div></div>
+    <div class="row"><div class="t">Lun. 23/11</div><div class="what">Caisses polystyrène Cooled Solutions (45 caisses, palette)<span class="tag ok">reçu</span><small>Livrées au 14 rue de Péronne, Sartrouville</small></div><div class="who">Guinguette</div></div>
+    <div class="row"><div class="t">Mer. 25/11</div><div class="what">Livraison du champagne Lebeau-Batiste, 402 bouteilles<span class="tag ok">prévu</span><small>À Sartrouville, puis au froid dans les frigos de la Guinguette jusqu'au 1/12</small></div><div class="who">Lebeau-Batiste</div></div>
+  </div>
+
+  <div class="day">Lundi 30 novembre : montage</div>
+  <div class="tl">
+    <div class="row"><div class="t">10h30 - 11h30</div><div class="what">Livraison LOMAREC, bons 226110503 et 226110581 (four compris), et déchargement de la voiture de Thomas sur le même créneau (dont tire-bouchons, pinces à glaçons et consommables)<span class="tag ok">confirmé par LOMAREC</span><small>Verrerie, mange-debout, buffets, nappes noires, 25 paravents, bâche, vasques, 5 tables, 5 armoires, lave-mains. Pointage et photos à la réception, réserves sur le bon.</small></div><div class="who">Thomas, Ema, Alex</div></div>
+    <div class="row"><div class="t">11h30 - 17h</div><div class="what">Installation complète
+      <ul class="chk">
+        <li>Pointage du matériel LOMAREC et de la voiture : photos et réserves sur le bon</li>
+        <li>Office traiteur : pose de la bâche (6 x 8 m), montage des 25 paravents, 5 tables en place (four, dressage froid, dressage chaud, départ, retour)</li>
+        <li>Armoires réfrigérées en place, branchées et mises en froid dès maintenant (plusieurs heures pour descendre à +4 °C)</li>
+        <li>Four posé sur sa table, essai de chauffe, lave-mains rempli</li>
+        <li>Rallonges et multiprises : four et armoires sur des lignes séparées si possible</li>
+        <li>Pièces cocktail (environ 3 000, 2/3 salé et 1/3 sucré) livrées depuis la Guinguette et rangées dans les armoires réfrigérées, en fin de créneau, une fois les armoires à +4 °C (contrôle au thermomètre)</li>
+        <li>Salle : 3 buffets montés et habillés des nappes noires, 10 mange-debout housés, vasques en place</li>
+        <li>Mise en place des fleurs sur les buffets</li>
+        <li>Verres disposés sur les buffets, le reste rangé en casiers dans l'office</li>
+        <li>Poubelles et stock (consommables, plateaux) rangés dans l'office</li>
+        <li>Tour final : rien qui gêne les passages, photos de l'installation</li>
+      </ul>
+      <small>Implantation des buffets selon le plan Unless (à recevoir). Four 2 700 W et 5 armoires de 190 W : au moins 2 prises 16 A sur des lignes différentes.</small></div><div class="who">Thomas, Ema, Alex</div></div>
+    <div class="row"><div class="t">18h</div><div class="what">Fin d'accès au site</div><div class="who"></div></div>
+  </div>
+
+  <div class="day">Mardi 1er décembre : jour J</div>
+  <div class="tl">
+    <div class="row"><div class="t">8h30</div><div class="what">Récupération de la camionnette prêtée par Benoît (à Sartrouville)</div><div class="who">Thomas</div></div>
+    <div class="row"><div class="t">9h - 11h30</div><div class="what">Chargement à Sartrouville, départ vers le Grand Palais à 11h30. Chargement dans la camionnette de Benoît : caisses polystyrène avec les bouteilles déjà dedans et au frais (champagne et boissons), Matécito du client (1 000 canettes) et bières (300 x 33 cl), pains de glace<small>Voir l'onglet Pense-bête</small></div><div class="who">Thomas, Alex</div></div>
+    <div class="row"><div class="t">12h30 - 13h</div><div class="what">Arrivée au Grand Palais, déchargement par le monte-charge, bouteilles rangées dans l'office<small>Ema rejoint Thomas et Alex directement au Grand Palais</small></div><div class="who">Thomas, Alex, Ema</div></div>
+    <div class="row"><div class="t">13h - 15h</div><div class="what">Livraison glace Promo Glaçons : 17 sacs de glace pilée et 1 sac de glaçons (20 kg chacun)<span class="tag ok">confirmé</span><small>Contact sur place : Thomas, 06 37 10 94 63</small></div><div class="who">Promo Glaçons</div></div>
+    <div class="row"><div class="t">13h - 15h</div><div class="what">Livraison des softs Barnum (Evian, Badoit, jus)<span class="tag ok">prévu</span><small>Devis DV026223</small></div><div class="who">Barnum</div></div>
+    <div class="row"><div class="t">15h - 17h</div><div class="what">Mise en place boissons : vasques et caisses garnies de glace, bouteilles au froid, contrôle des verres déjà en place</div><div class="who">Associés</div></div>
+    <div class="row"><div class="t">17h - 17h30</div><div class="what">Repas rapide des associés avant l'ouverture<small>Prévoir de quoi manger sur place : il n'y aura plus de pause possible avant 23h30</small></div><div class="who">Associés</div></div>
+    <div class="row"><div class="t">17h</div><div class="what">Arrivée du personnel : briefing, tenue chemise blanche et pantalon noir</div><div class="who">2 chefs de rang, 8 runners</div></div>
+    <div class="row"><div class="t">18h30</div><div class="what">Ouverture aux invités, service champagne et softs</div><div class="who"></div></div>
+    <div class="row"><div class="t">19h15</div><div class="what">Discours (environ 30 min) : pas de passage de plateaux pendant la prise de parole</div><div class="who"></div></div>
+    <div class="row"><div class="t">20h30</div><div class="what">Préchauffage du four, dressage des premiers plateaux</div><div class="who">Office</div></div>
+    <div class="row"><div class="t">21h - 23h30</div><div class="what">Cocktail dînatoire : envoi des plateaux, chaud et froid en alternance</div><div class="who">Office + runners</div></div>
+    <div class="row"><div class="t">23h30</div><div class="what">Fin de la soirée, débarrassage de la salle</div><div class="who">Tous</div></div>
+    <div class="row"><div class="t">23h30 - 1h</div><div class="what">Rangement : verrerie en casiers, comptage avec photos, matériel LOMAREC regroupé, déchets et verre évacués, boissons non ouvertes en cartons</div><div class="who">Associés + runners</div></div>
+  </div>
+
+  <div class="day">Mercredi 2 décembre</div>
+  <div class="tl">
+    <div class="row"><div class="t">1h - 2h</div><div class="what">Reprise LOMAREC (les deux bons)<span class="tag ok">confirmé</span><small>Comptage de la casse fait par LOMAREC</small></div><div class="who">Thomas</div></div>
+    <div class="row"><div class="t">2h - 3h</div><div class="what">Retour à Sartrouville avec la camionnette de Benoît : glacières et caisses, boissons non ouvertes (cartons intacts), matériel de la Guinguette (rallonges, balais, tire-bouchons…), déchets non évacués sur place</div><div class="who">Associés</div></div>
+    <div class="row"><div class="t">Journée</div><div class="what">Reprise Barnum des cartons non ouverts au 14 rue de Péronne, Sartrouville<span class="tag ok">validé</span></div><div class="who">Barnum</div></div>
+    <div class="row"><div class="t">Journée</div><div class="what">Rendre la camionnette à Benoît, ranger le matériel à la Guinguette</div><div class="who">Thomas</div></div>
+  </div>
+</section>
+
+<section id="pense-bete" class="tab" hidden>
+  <h2>Pense-bête</h2>
+  <p class="sub">Ce qu'il faut apporter. Les cases cochées sont gardées sur ce téléphone uniquement.</p>
+  <p class="sub" id="pb-count"></p>
+  <div id="pb-list" style="display:flex;flex-direction:column;gap:12px"></div>
+  <button class="reset" id="pb-reset" type="button">Tout décocher</button>
+</section>
+
+<section id="plan" class="tab" hidden>
+  <h2>Plan de l'office traiteur</h2>
+  <p class="sub">Proposition d'implantation sur l'emprise de la bâche LOMAREC (6 x 8 m, soit 48 m²), fermée par les paravents. Le plan du Salon Seine n'a pas encore été transmis par Unless : l'emplacement exact et l'orientation sont à caler avec eux.</p>
+
+  <div class="planbox">
+  <svg viewBox="0 0 860 640" role="img" aria-labelledby="plan-t">
+    <title id="plan-t">Plan de l'office traiteur, 8 m sur 6 m, échelle 1 m pour 100 px</title>
+    <rect x="30" y="30" width="800" height="600" fill="none" stroke="var(--muted)" stroke-width="2" stroke-dasharray="8 6"/>
+    <line x1="30" y1="30" x2="830" y2="30" stroke="var(--fg)" stroke-width="6"/>
+    <text x="430" y="22" text-anchor="middle" font-size="13">Mur du salon (prises électriques)</text>
+    <line x1="30" y1="30" x2="30" y2="630" stroke="var(--accent)" stroke-width="5"/>
+    <line x1="830" y1="30" x2="830" y2="630" stroke="var(--accent)" stroke-width="5"/>
+    <line x1="30" y1="630" x2="150" y2="630" stroke="var(--accent)" stroke-width="5"/>
+    <line x1="270" y1="630" x2="590" y2="630" stroke="var(--accent)" stroke-width="5"/>
+    <line x1="710" y1="630" x2="830" y2="630" stroke="var(--accent)" stroke-width="5"/>
+    <rect x="40" y="38" width="372" height="80" rx="4" fill="var(--z-froid)"/>
+    <g fill="var(--card)" stroke="var(--fg)" stroke-width="1.2">
+      <rect x="45" y="40" width="70" height="71"/><rect x="119" y="40" width="70" height="71"/><rect x="193" y="40" width="70" height="71"/><rect x="267" y="40" width="70" height="71"/><rect x="341" y="40" width="70" height="71"/>
+    </g>
+    <g font-size="12" text-anchor="middle"><text x="80" y="80">A1</text><text x="154" y="80">A2</text><text x="228" y="80">A3</text><text x="302" y="80">A4</text><text x="376" y="80">A5</text></g>
+    <text x="228" y="136" text-anchor="middle" font-size="12">5 armoires 400 L (0,70 x 0,71 m), portes vers la salle</text>
+    <rect x="520" y="38" width="300" height="110" rx="4" fill="var(--z-chaud)"/>
+    <rect x="610" y="40" width="200" height="80" fill="var(--card)" stroke="var(--fg)" stroke-width="1.2"/>
+    <rect x="620" y="48" width="84" height="54" fill="var(--z-chaud)" stroke="var(--fg)" stroke-width="1.2"/>
+    <text x="662" y="80" text-anchor="middle" font-size="11">Four</text>
+    <text x="755" y="85" text-anchor="middle" font-size="11">Plaques</text>
+    <text x="665" y="140" text-anchor="middle" font-size="12">T1 : table four 2 x 0,8 m (prise dédiée 16 A)</text>
+    <rect x="190" y="250" width="440" height="130" rx="4" fill="var(--z-dress)"/>
+    <rect x="210" y="262" width="200" height="80" fill="var(--card)" stroke="var(--fg)" stroke-width="1.2"/>
+    <rect x="415" y="262" width="200" height="80" fill="var(--card)" stroke="var(--fg)" stroke-width="1.2"/>
+    <text x="310" y="307" text-anchor="middle" font-size="12">T2 : dressage froid</text>
+    <text x="515" y="307" text-anchor="middle" font-size="12">T3 : dressage chaud</text>
+    <text x="412" y="370" text-anchor="middle" font-size="12">Îlot de dressage (plateaux regarnis ici)</text>
+    <rect x="40" y="430" width="230" height="120" rx="4" fill="var(--z-dress)"/>
+    <rect x="50" y="440" width="200" height="80" fill="var(--card)" stroke="var(--fg)" stroke-width="1.2"/>
+    <text x="150" y="485" text-anchor="middle" font-size="12">T4 : départ plateaux</text>
+    <text x="155" y="543" text-anchor="middle" font-size="11">napperons, pics, serviettes</text>
+    <rect x="590" y="430" width="230" height="120" rx="4" fill="var(--z-sale)"/>
+    <rect x="610" y="440" width="200" height="80" fill="var(--card)" stroke="var(--fg)" stroke-width="1.2"/>
+    <text x="710" y="485" text-anchor="middle" font-size="12">T5 : retour et débarrassage</text>
+    <rect x="760" y="560" width="40" height="40" fill="var(--z-sale)" stroke="var(--fg)" stroke-width="1"/><text x="780" y="584" text-anchor="middle" font-size="10">Bac</text>
+    <rect x="700" y="560" width="50" height="40" fill="var(--z-sale)" stroke="var(--fg)" stroke-width="1"/><text x="725" y="584" text-anchor="middle" font-size="10">Poub.</text>
+    <rect x="450" y="160" width="48" height="42" fill="var(--z-froid)" stroke="var(--fg)" stroke-width="1.2"/>
+    <text x="474" y="222" text-anchor="middle" font-size="11">Lave-mains</text>
+    <rect x="290" y="440" width="280" height="100" rx="4" fill="var(--z-stock)"/>
+    <text x="430" y="480" text-anchor="middle" font-size="12">Stock : caisses isothermes,</text>
+    <text x="430" y="497" text-anchor="middle" font-size="12">plateaux propres, consommables</text>
+    <text x="210" y="652" text-anchor="middle" font-size="13" font-weight="600" fill="var(--accent)">SORTIE plateaux pleins</text>
+    <text x="650" y="652" text-anchor="middle" font-size="13" font-weight="600" fill="var(--accent)">ENTRÉE plateaux vides</text>
+    <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/></marker></defs>
+    <path d="M412 345 C 330 400, 230 410, 200 600" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+    <path d="M650 610 C 690 560, 700 540, 705 525" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+    <line x1="40" y1="600" x2="140" y2="600" stroke="var(--fg)" stroke-width="2"/><text x="90" y="594" text-anchor="middle" font-size="11">1 m</text>
+  </svg>
+  </div>
+
+  <div class="legend">
+    <div class="lg"><span class="sw" style="background:var(--z-froid)"></span><div><b>Froid</b><br><small>5 armoires contre le mur, près des prises, portes dégagées (1 m devant)</small></div></div>
+    <div class="lg"><span class="sw" style="background:var(--z-chaud)"></span><div><b>Chaud</b><br><small>Four sur T1, sur sa propre ligne 16 A, loin des armoires</small></div></div>
+    <div class="lg"><span class="sw" style="background:var(--z-dress)"></span><div><b>Dressage et départ</b><br><small>Marche en avant : armoire ou four, îlot, table de départ, sortie</small></div></div>
+    <div class="lg"><span class="sw" style="background:var(--z-sale)"></span><div><b>Retour sale</b><br><small>Entrée séparée pour que les plateaux vides ne croisent pas les pleins</small></div></div>
+    <div class="lg"><span class="sw" style="background:var(--z-stock)"></span><div><b>Stock</b><br><small>Plateaux propres, consommables, caisses isothermes</small></div></div>
+    <div class="lg"><span class="sw" style="background:var(--accent)"></span><div><b>Paravents</b><br><small>25 Acapulco 3 feuilles sur les côtés et en façade, deux ouvertures d'environ 1,2 m</small></div></div>
+  </div>
+
+  <h3>Équipement de l'office</h3>
+  <div class="tw"><table>
+    <tr><th>Élément</th><th>Qté</th><th>Dimensions</th><th>Source</th></tr>
+    <tr><td>Armoires réfrigérées 400 L porte pleine, 4 grilles</td><td class="n">5</td><td class="n">70 x 71 x 199 cm, 190 W</td><td>LOMAREC</td></tr>
+    <tr><td>Four à air pulsé, 4 grilles 80 x 60</td><td class="n">1</td><td class="n">84 x 54 x 57 cm, 2 700 W</td><td>LOMAREC</td></tr>
+    <tr><td>Tables rectangulaires</td><td class="n">5</td><td class="n">200 x 80 cm</td><td>LOMAREC</td></tr>
+    <tr><td>Lave-mains autonome</td><td class="n">1</td><td class="n">48 x 42 x 124 cm</td><td>LOMAREC</td></tr>
+    <tr><td>Paravents Acapulco 3 feuilles</td><td class="n">25</td><td class="n">à confirmer</td><td>LOMAREC</td></tr>
+    <tr><td>Bâche polyane noire</td><td class="n">1</td><td class="n">6 x 8 m</td><td>LOMAREC</td></tr>
+    <tr><td>Pinces de service</td><td class="n">5</td><td class="n"></td><td>À acheter</td></tr>
+  </table></div>
+
+  <h3>Points à faire confirmer par Unless</h3>
+  <ul class="chk">
+    <li>Le plan du Salon Seine avec l'emplacement de l'office et des 3 buffets.</li>
+    <li>Le nombre de prises et de lignes électriques séparées près de l'office (four 2 700 W, armoires 5 x 190 W).</li>
+    <li>Le créneau du 1/12 entre 13h et 15h pour la glace et les softs, à faire valider par la régie.</li>
+    <li>L'emplacement du stationnement de la camionnette le 1/12, et la benne à verre.</li>
+  </ul>
+
+  <h3>Accès au Grand Palais et stationnement</h3>
+  <ul class="chk">
+    <li>Livraisons par la rampe à l'angle de la Galerie 8, accès par le Cours la Reine après la porte E (Paris 8e). Interphone à la porte.</li>
+    <li>Porte de la rampe : 3,40 m de haut et 2,50 m de large maximum. Les véhicules restent dehors, environ 50 m à pied jusqu'au monte-charge NFS-M204.</li>
+    <li>Aire de livraison = arrêt temporaire : le conducteur reste près du véhicule.</li>
+    <li>Stationnement pour la soirée : zone bleue réservée le long du Cours la Reine (à confirmer par Unless).</li>
+  </ul>
+</section>
+</div>
+<script>
+const ITEMS=[{"id":"tire-bouchons","label":"Tire-bouchons","ou":"Chez Thomas","qui":"Thomas"},{"id":"pinces-glacons","label":"Pinces à glaçons","ou":"","qui":"Ema"},{"id":"balai-pelle","label":"Balais et pelle (verre cassé)","ou":"À la Guinguette","qui":""},{"id":"collations-personnel","label":"Collations pour le personnel (2 chefs de rang, 8 runners) et les associés","ou":"À acheter (Metro)","qui":""},{"id":"rallonges","label":"Rallonges, multiprises et enrouleurs (four + 5 armoires, 2 lignes séparées)","ou":"","qui":""},{"id":"gants","label":"Gants jetables","ou":"","qui":""},{"id":"lingettes","label":"Lingettes et produit désinfectant alimentaire","ou":"","qui":""},{"id":"torchons","label":"Torchons et essuie-verres","ou":"","qui":""},{"id":"sacs-poubelle","label":"Sacs-poubelle 110 L","ou":"Metro","qui":""},{"id":"eau-lave-mains","label":"Eau pour le lave-mains (bidons) et savon","ou":"","qui":""},{"id":"decapsuleurs","label":"Décapsuleurs (300 bières du client)","ou":"","qui":""},{"id":"pelles-glace","label":"Seaux et pelles à glace","ou":"","qui":""},{"id":"tabliers","label":"Tabliers","ou":"","qui":""},{"id":"gaffer","label":"Gaffer, colliers de serrage, ciseaux","ou":"","qui":""},{"id":"marqueurs","label":"Marqueurs et étiquettes","ou":"","qui":""},{"id":"frontales","label":"Lampes frontales (démontage de nuit)","ou":"","qui":""},{"id":"secours","label":"Trousse de premiers secours","ou":"","qui":""},{"id":"consommables","label":"Consommables cocktail : 1 000 pics bambou, 1 000 mini-fourchettes, 250 petites cuillères, napperons","ou":"Metro (à acheter)","qui":""},{"id":"pinces-service","label":"5 pinces de service","ou":"À acheter","qui":""},{"id":"serviettes","label":"Serviettes cocktail (3 lots de 2 000)","ou":"Metro","qui":""}];
+const KEY='gp-pense-bete-v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+let state=load();
+function el(t,p,k){const e=document.createElement(t);Object.assign(e,p||{});(k||[]).forEach(x=>e.append(x));return e}
+function render(){
+  const list=document.getElementById('pb-list');list.textContent='';
+  const groups={};ITEMS.forEach(i=>{const k=i.qui||'À attribuer';(groups[k]=groups[k]||[]).push(i)});
+  Object.keys(groups).sort((a,b)=>a==='À attribuer'?1:b==='À attribuer'?-1:a.localeCompare(b,'fr')).forEach(name=>{
+    const arr=groups[name];const done=arr.filter(i=>state[i.id]).length;
+    const ul=el('ul',{className:'items'});
+    arr.forEach(i=>{
+      const cb=el('input',{type:'checkbox',checked:!!state[i.id]});
+      cb.addEventListener('change',()=>{state[i.id]=cb.checked;save(state);render()});
+      const txt=el('span',{},[el('b',{textContent:i.label})]);if(i.ou)txt.append(el('small',{textContent:i.ou}));
+      ul.append(el('li',{className:state[i.id]?'done':''},[el('label',{},[cb,txt])]));
+    });
+    list.append(el('div',{className:'group'},[el('h3',{},[document.createTextNode(name),el('span',{textContent:done+' / '+arr.length})]),ul]));
+  });
+  const n=ITEMS.filter(i=>state[i.id]).length;
+  document.getElementById('pb-count').textContent=n+' sur '+ITEMS.length+' cochés';
+}
+document.getElementById('pb-reset').addEventListener('click',()=>{state={};save(state);render()});
+render();
+const tabs=[...document.querySelectorAll('.tabs button')];
+function show(id){if(!document.getElementById(id))id='planning';
+  document.querySelectorAll('.tab').forEach(s=>s.hidden=s.id!==id);
+  tabs.forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));
+  try{localStorage.setItem('gp-tab',id)}catch(e){}}
+tabs.forEach(b=>b.addEventListener('click',()=>{history.replaceState(null,'','#'+b.dataset.t);show(b.dataset.t);window.scrollTo(0,0)}));
+let start=location.hash.slice(1);if(!start){try{start=localStorage.getItem('gp-tab')}catch(e){}}
+show(start||'planning');
+window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
+</script>
+</body></html>
